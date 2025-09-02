@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Générateur de Facture</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <div class="main-center">
+    <div class="container">
+      <img src="logo.png" alt="Logo" class="logo" />
+      <h1>Générateur de Facture</h1>
+      <form id="payment-form">
+        <input type="text" id="customerName" placeholder="Nom du client" required>
+        <textarea id="description" placeholder="Description de la facture:" required rows="4" style="resize:vertical;"></textarea>
+        <input type="number" id="amount" placeholder="Montant (€)" required>
+        <div id="card-element" class="stripe-style"></div>
+        <button type="submit">Payer et générer la facture</button>
+      </form>
+      <div id="payment-message"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
