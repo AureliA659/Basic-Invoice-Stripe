@@ -31,6 +31,10 @@ body {
   margin-top: 0;
 }
 
+.logo.hidden {
+  display: none;
+}
+
 h1 {
   color: #6772e5;
   margin-bottom: 28px;
