@@ -55,8 +55,7 @@ app.post("/create-payment-intent", async (req, res) => {
     const invoiceNumber = getNextInvoiceNumber();
 
     const doc = new PDFDocument({ margin: 40 });
-    // Logo
-    doc.image("public/logo.png", 40, 40, { width: 60 }).moveDown();
+    // Header
     doc.fontSize(24).fillColor("#1086f4").text("FACTURE AGL Tech", { align: "center" });
     doc.moveDown(3);
     doc.fontSize(12).fillColor("#1086f4").text("AGL Tech");
