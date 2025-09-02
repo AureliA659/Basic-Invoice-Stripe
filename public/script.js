@@ -1,4 +1,4 @@
-const stripe = Stripe(yourStripePublicKey);
+const stripe = Stripe(process.env.STRIPE_PUBLIC_KEY);
 
 const form = document.getElementById("payment-form");
 const messageDiv = document.getElementById("payment-message");
