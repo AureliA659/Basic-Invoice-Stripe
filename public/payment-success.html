@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Paiement réussi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main-center">
+    <div class="container">
+      <img src="logo.png" alt="Logo" class="logo" />
+      <h1>Paiement réussi !</h1>
+      <p>Merci pour votre paiement. Votre facture est disponible ci-dessous :</p>
+      <div id="download-link"></div>
+      <a href="index.html" style="display:block;margin-top:24px;">Retour à l'accueil</a>
+    </div>
+  </div>
+  <script>
+    // Affiche le lien de téléchargement de la facture si paramètre présent
+    const params = new URLSearchParams(window.location.search);
+    const invoice = params.get('invoice');
+    if (invoice) {
+      document.getElementById('download-link').innerHTML = `<a href="/download-invoice/${invoice}" target="_blank">Télécharger la facture PDF</a>`;
+    }
+  </script>
+</body>
+</html>
