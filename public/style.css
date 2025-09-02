@@ -25,12 +25,6 @@ body {
   position: relative;
 }
 
-.logo {
-  width: 80px;
-  margin-bottom: 18px;
-  margin-top: 0;
-}
-
 h1 {
   color: #6772e5;
   margin-bottom: 28px;
@@ -88,8 +82,5 @@ textarea {
     margin: 12px 4px 12px 4px;
     padding: 18px 8px 18px 8px;
     max-width: 98vw;
-  }
-  .logo {
-    width: 60px;
   }
 }

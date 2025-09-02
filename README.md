@@ -34,7 +34,6 @@ node server.js
 - Après paiement, téléchargez la facture PDF générée
 
 ### Personnalisation
-- Remplacez `public/logo.png` par votre logo
 - Modifiez l'adresse ou les champs dans `server.js` si besoin
 
 ### Fonctionnalités
@@ -80,7 +79,6 @@ node server.js
 - After payment, download the generated PDF invoice
 
 ### Customization
-- Replace `public/logo.png` with your logo
 - Edit the address or fields in `server.js` if needed
 
 ### Features
