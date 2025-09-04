@@ -1,4 +1,4 @@
-const stripe = Stripe("pk_test_51S2sTqCvken0mWUuOv1domSADuZA9GSsCStGYSHVFUw5kPvAkYLr296DUv5LjYIGXHS6q9RNBLd0hgdZINY4yzJs00nwpB2P0t");
+const stripe = Stripe(process.env.STRIPE_PUBLIC_KEY);
 
 const form = document.getElementById("payment-form");
 const messageDiv = document.getElementById("payment-message");
@@ -16,7 +16,7 @@ form.addEventListener("submit", async (e) => {
   const amount = document.getElementById("amount").value;
   const description = document.getElementById("description").value;
 
-  // Crée le PaymentIntent côté serveur
+  // Create PaymentIntent in server side
   const res = await fetch("/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Confirme le paiement avec Stripe Elements
+  // Confirm paiment with stripe elements
   const result = await stripe.confirmCardPayment(data.clientSecret, {
     payment_method: {
       card: card,
