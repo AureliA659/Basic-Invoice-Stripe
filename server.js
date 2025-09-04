@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-// Fonction pour générer un numéro de facture lisible et incrémental
+// Fonction to generate an invoice number incremented 
 function getNextInvoiceNumber() {
   const file = path.join("invoices", "invoice-number.txt");
   let year = new Date().getFullYear();
@@ -31,23 +31,23 @@ function getNextInvoiceNumber() {
   return `FAC-${year}-${String(number).padStart(4, "0")}`;
 }
 
-// ✅ Endpoint de création de paiement + facture
+// ✅ Endpoint of created payment  + invoice
 app.post("/create-payment-intent", async (req, res) => {
   try {
     const { amount, customerName, description } = req.body;
 
-    // Crée un PaymentIntent Stripe
+    // Create stripe payment
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100, // en centimes
       currency: "eur",
       automatic_payment_methods: { enabled: true },
     });
 
-    // Génère la facture PDF personnalisée
+    // create the pdf invoice
     const invoiceName = `invoice_${Date.now()}.pdf`;
     const invoicePath = path.join("invoices", invoiceName);
 
-    // Vérifie que le dossier invoices existe
+    // check if the invoice folder exist
     if (!fs.existsSync("invoices")) {
       fs.mkdirSync("invoices");
     }
@@ -60,18 +60,18 @@ app.post("/create-payment-intent", async (req, res) => {
     doc.fontSize(24).fillColor("#1086f4").text("FACTURE AGL Tech", { align: "center" });
     doc.moveDown(3);
     doc.fontSize(12).fillColor("#1086f4").text("AGL Tech");
-    doc.fontSize(12).fillColor("#1086f4").text("1 rue Théophile Gautier");
-    doc.fontSize(12).fillColor("#1086f4").text("92200 Neuilly-sur-Seine");
-    doc.fontSize(12).fillColor("#1086f4").text("SIREN: 943 802 272");
+    doc.fontSize(12).fillColor("#1086f4").text("Company's address");
+    doc.fontSize(12).fillColor("#1086f4").text("Address next");
+    doc.fontSize(12).fillColor("#1086f4").text("SIREN: XXX XXX XXX");
     doc.moveDown();
     doc.fontSize(12).fillColor("#333").text(`Numéro de facture : ${invoiceNumber}`);
     doc.text(`Date : ${new Date().toLocaleDateString()}`);
     doc.text(`Client : ${customerName}`);
     doc.moveDown(2);
-    // Tableau récapitulatif
+    // Recap array
     doc.fontSize(14).fillColor("#000").text("Détail :", { underline: true });
     doc.moveDown(0.5);
-    // Description multiligne avec gestion des sauts de ligne
+    // Description multilines
     if (description) {
       description.split(/\r?\n/).forEach(line => {
         doc.fontSize(12).text(line);
@@ -95,7 +95,7 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
-// Endpoint pour télécharger la facture PDF
+// Endpoint for download the invoice as PDF
 app.get("/download-invoice/:filename", (req, res) => {
   const filename = req.params.filename;
   const invoicePath = path.join(__dirname, "invoices", filename);
